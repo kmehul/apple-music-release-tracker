@@ -1,0 +1,45 @@
+# Your tracked artists — ONE per line.
+# To add an artist: add a line with their name.
+# To remove an artist: delete their line.
+# Lines starting with # are ignored. That's the whole maintenance workflow.
+
+Aaron Hibell
+Above & Beyond
+ALLKNIGHT
+Anjunabeats
+Anjunadeep
+ANUQRAM
+Atlantis
+CamelPhat
+Daft Punk
+Darren Tate
+Durante
+Dusky
+Eelke Kleijn
+Eric Prydz
+Ezequiel Arias
+Genix
+grum
+Hiroyuki Sawano
+J Ribbon
+Jaytech
+Karan Aujla
+Lane 8
+LAR
+Lost Frequencies
+Marsh
+MEDUZA
+Michael Casette
+mor.a.mor
+MYRNE
+Nitrous Oxide
+ODESZA
+PROFF
+Pryda
+Ronski Speed
+Shubh
+Sunny Lax
+Swedish House Mafia
+Talwiinder
+Tiesto
+YOTTO
