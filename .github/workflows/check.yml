@@ -32,10 +32,14 @@ jobs:
           ITUNES_COUNTRY: ${{ vars.ITUNES_COUNTRY || 'IN' }}
         run: python track_releases.py
 
-      - name: Commit updated state
+      - name: Save state and keep the schedule alive
+        if: always()   # run even if the check step errored, so the cron never sleeps
         run: |
           git config user.name "release-bot"
           git config user.email "actions@users.noreply.github.com"
+          # Monthly heartbeat: guarantees repo activity within GitHub's 60-day
+          # window, so a long stretch with no new releases can't disable the cron.
+          date -u +%Y-%m > .heartbeat
           git add -A
-          git diff --cached --quiet || git commit -m "Update release state [skip ci]"
+          git diff --cached --quiet || git commit -m "Update state / keep-alive [skip ci]"
           git push

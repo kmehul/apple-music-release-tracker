@@ -91,3 +91,10 @@ to do a dry run (it just prints what it finds).
 - **Check more/less often** — edit the `cron` line in `.github/workflows/check.yml`.
 - **How far back counts as "new"** — set `RECENT_DAYS` (default 45). This guards
   against re-announcing old albums if `seen.json` is ever lost.
+
+## Never pauses
+
+GitHub auto-disables scheduled workflows after 60 days of no repo activity. To
+prevent that during a long stretch with no new releases, each run updates a
+`.heartbeat` file with the current month and commits it — keeping the repo
+active well inside the 60-day window, so the schedule runs forever untouched.
