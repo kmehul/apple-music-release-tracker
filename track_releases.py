@@ -33,6 +33,7 @@ ROOT = Path(__file__).parent
 ARTISTS_FILE = ROOT / "artists.txt"
 IDS_FILE = ROOT / "artist_ids.json"
 SEEN_FILE = ROOT / "seen.json"
+BASELINED_FILE = ROOT / "baselined.json"
 
 COUNTRY = os.environ.get("ITUNES_COUNTRY", "IN")
 RECENT_DAYS = int(os.environ.get("RECENT_DAYS", "45"))
@@ -176,10 +177,19 @@ def main():
 
     ids_cache = load_json(IDS_FILE, {})
     seen = load_json(SEEN_FILE, None)
+    baselined = load_json(BASELINED_FILE, None)
     first_run = seen is None
     if first_run:
         print("First run: establishing a baseline (no notifications this time).")
         seen = {}
+
+    # Which artists have already been baselined. A newly-added artist gets its
+    # existing catalogue recorded silently (like the initial run), so you're only
+    # alerted to releases that appear AFTER you add them. On the first run under
+    # this logic, treat every already-resolved artist as baselined.
+    if baselined is None:
+        baselined = [] if first_run else [str(v["artistId"]) for v in ids_cache.values() if v]
+    baselined = set(str(x) for x in baselined)
 
     now = datetime.now(timezone.utc)
     cutoff = now - timedelta(days=RECENT_DAYS)
@@ -189,6 +199,8 @@ def main():
         info = resolve_artist(name, ids_cache)
         if not info:
             continue
+        aid = str(info["artistId"])
+        artist_is_new = aid not in baselined  # freshly added to artists.txt
         try:
             releases = get_releases(info["artistId"])
         except Exception as exc:
@@ -212,22 +224,35 @@ def main():
             }
             seen[cid] = record  # record it so we never re-announce
 
-            if first_run:
-                continue
+            if first_run or artist_is_new:
+                continue  # baseline silently (initial run, or a newly added artist)
             # Only notify for genuinely recent or upcoming (pre-order) releases,
             # so a lost seen.json can't flood you with old back-catalogue.
             if reldate is not None and reldate >= cutoff:
                 record["upcoming"] = reldate > now
                 new_items.append(record)
 
+        baselined.add(aid)
         time.sleep(1)
 
     save_json(IDS_FILE, ids_cache)
     save_json(SEEN_FILE, seen)
+    save_json(BASELINED_FILE, sorted(baselined))
 
     if first_run:
         print(f"Baseline set with {len(seen)} known releases. Future runs notify on new ones.")
         return
+
+    # Collapse duplicate editions of the same release — Apple often lists one
+    # single under several collection IDs, so dedupe by artist + title.
+    deduped, titles = [], set()
+    for it in new_items:
+        key = (it["artist"], it["name"])
+        if key in titles:
+            continue
+        titles.add(key)
+        deduped.append(it)
+    new_items = deduped
 
     if not new_items:
         print("No new releases.")

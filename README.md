@@ -33,6 +33,11 @@ Open `artists.txt` and:
 
 Commit and push. That's it — IDs resolve automatically on the next run.
 
+**Adding an artist won't spam you with their old music.** A newly-added artist
+is baselined silently (their existing catalogue is recorded, not announced), and
+you're only alerted to releases that appear *after* you add them — tracked in
+`baselined.json`.
+
 ## One-time setup
 
 ### 1. Put this on GitHub
