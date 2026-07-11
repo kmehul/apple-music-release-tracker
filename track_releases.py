@@ -12,7 +12,9 @@ State lives in two JSON files so nothing gets re-announced:
 
 Zero third-party dependencies: pure Python standard library.
 
-Config is read from environment variables (see README.md):
+Only actually-released items are announced — pre-orders/upcoming releases are
+skipped until the day they go live. Config is read from environment variables
+(see README.md):
   NTFY_TOPIC, NTFY_SERVER
   EMAIL_TO, EMAIL_FROM, SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS
   ITUNES_COUNTRY (default "US"), RECENT_DAYS (default 45)
@@ -216,6 +218,11 @@ def main():
                 continue
 
             reldate = parse_date(rel.get("releaseDate"))
+            # Skip pre-orders / not-yet-released items: don't record or notify
+            # them, so they're caught the day they actually go live on Apple Music.
+            if reldate is not None and reldate > now:
+                continue
+
             record = {
                 "name": rel.get("collectionName"),
                 "artist": info["artistName"],
@@ -226,10 +233,9 @@ def main():
 
             if first_run or artist_is_new:
                 continue  # baseline silently (initial run, or a newly added artist)
-            # Only notify for genuinely recent or upcoming (pre-order) releases,
+            # Only notify for releases that are actually out and reasonably recent,
             # so a lost seen.json can't flood you with old back-catalogue.
             if reldate is not None and reldate >= cutoff:
-                record["upcoming"] = reldate > now
                 new_items.append(record)
 
         baselined.add(aid)
@@ -261,17 +267,15 @@ def main():
     # One push per release (so each buzzes your phone)...
     for it in new_items:
         day = (it["date"] or "?")[:10]
-        tag = "coming " if it.get("upcoming") else "out "
         title = f"{it['artist']} – {it['name']}"
-        body = f"{'Coming' if it.get('upcoming') else 'Out now'} ({day})\n{it['url'] or ''}".strip()
+        body = f"Out now ({day})\n{it['url'] or ''}".strip()
         notify_ntfy(title, body, it["url"])
 
     # ...and one combined email (so your inbox stays tidy).
     lines = []
     for it in new_items:
         day = (it["date"] or "?")[:10]
-        status = "upcoming" if it.get("upcoming") else "out now"
-        lines.append(f"- {it['artist']} — {it['name']} ({status}, {day})\n  {it['url'] or ''}")
+        lines.append(f"- {it['artist']} — {it['name']} (out now, {day})\n  {it['url'] or ''}")
     subject = f"🎵 {len(new_items)} new release(s) from your artists"
     notify_email(subject, "New releases from your tracked artists:\n\n" + "\n\n".join(lines))
 

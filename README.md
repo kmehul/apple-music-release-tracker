@@ -5,8 +5,9 @@ single, EP, or album — instead of relying on Apple Music's flaky notifications
 
 It works by checking Apple's free [iTunes lookup API](https://performance-partners.apple.com/search-api)
 for each artist on a schedule, remembering what it has already seen, and alerting
-you on anything new (including pre-orders/upcoming releases). No Apple Developer
-account, no paid services — it runs for free on GitHub Actions.
+you the moment something is actually out (pre-orders/upcoming releases are
+skipped until they go live). No Apple Developer account, no paid services — it
+runs for free on GitHub Actions.
 
 ## How it works
 
