@@ -170,5 +170,33 @@
   "Estiva": {
     "artistId": 274114450,
     "artistName": "Estiva"
+  },
+  "Eric Luttrell": {
+    "artistId": 408612230,
+    "artistName": "Eric Luttrell"
+  },
+  "Harry Diamond": {
+    "artistId": 96830186,
+    "artistName": "Harry Diamond"
+  },
+  "Matt Fax": {
+    "artistId": 512509524,
+    "artistName": "Matt Fax"
+  },
+  "mor·a·mor": {
+    "artistId": 1813873750,
+    "artistName": "mor•a•mor"
+  },
+  "Simon Gregory": {
+    "artistId": 598929246,
+    "artistName": "Simon Gregory"
+  },
+  "Super8 & Tab": {
+    "artistId": 256555940,
+    "artistName": "Super8 & Tab"
+  },
+  "XIRA": {
+    "artistId": 1400537338,
+    "artistName": "XIRA"
   }
 }
