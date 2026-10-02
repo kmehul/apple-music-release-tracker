@@ -1,8 +1,15 @@
 name: Check for new releases
 
 on:
+  # Roughly every 6 hours, deliberately at odd minutes: GitHub delays and
+  # sometimes drops scheduled runs at the top of the hour, its busiest time.
+  # Times are UTC (IST alongside). The 00:17 IST run catches releases that
+  # went live at midnight IST.
   schedule:
-    - cron: "0 */6 * * *"   # every 6 hours (UTC); adjust as you like
+    - cron: "47 18 * * *"   # 00:17 IST
+    - cron: "53 0 * * *"    # 06:23 IST
+    - cron: "41 6 * * *"    # 12:11 IST
+    - cron: "37 12 * * *"   # 18:07 IST
   workflow_dispatch: {}       # lets you run it manually from the Actions tab
 
 permissions:
@@ -41,4 +48,7 @@ jobs:
           date -u +%Y-%m > .heartbeat
           git add -A
           git diff --cached --quiet || git commit -m "Update state / keep-alive [skip ci]"
+          # Pick up any edit made while this run was going (e.g. to artists.txt),
+          # so the push isn't rejected and this run's state isn't lost.
+          git pull --rebase origin main
           git push

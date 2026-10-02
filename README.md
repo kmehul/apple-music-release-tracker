@@ -86,7 +86,8 @@ to do a dry run (it just prints what it finds).
 
 ## Tuning
 
-- **Check more/less often** — edit the `cron` line in `.github/workflows/check.yml`.
+- **Check more/less often** — edit the `cron` lines in `.github/workflows/check.yml`.
+  Keep them at odd minutes: GitHub delays or drops runs scheduled on the hour.
 - **How far back counts as "new"** — set `RECENT_DAYS` (default 120). Any
   unseen release dated within this window is emailed; older ones are recorded
   silently, so a catalogue re-listing can't flood you with old albums.
