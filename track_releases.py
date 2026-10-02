@@ -17,7 +17,7 @@ skipped until the day they go live. Config is read from environment variables
 (see README.md):
   NTFY_TOPIC, NTFY_SERVER
   EMAIL_TO, EMAIL_FROM, SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS
-  ITUNES_COUNTRY (default "IN"), RECENT_DAYS (default 45)
+  ITUNES_COUNTRY (default "IN"), RECENT_DAYS (default 120)
   STORE_UTC_OFFSET_MIN (default 330, i.e. IST — the storefront's local time)
 
 If an email fails to send, the releases in it are left unrecorded and the run
@@ -42,7 +42,7 @@ SEEN_FILE = ROOT / "seen.json"
 BASELINED_FILE = ROOT / "baselined.json"
 
 COUNTRY = os.environ.get("ITUNES_COUNTRY", "IN")
-RECENT_DAYS = int(os.environ.get("RECENT_DAYS", "45"))
+RECENT_DAYS = int(os.environ.get("RECENT_DAYS", "120"))
 # Apple drops releases at local midnight in each storefront but timestamps them
 # ~07:00 UTC, so release days are compared in the storefront's own timezone.
 STORE_TZ = timezone(timedelta(minutes=int(os.environ.get("STORE_UTC_OFFSET_MIN", "330"))))
