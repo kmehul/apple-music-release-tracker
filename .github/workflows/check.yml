@@ -24,7 +24,6 @@ jobs:
 
       - name: Run tracker
         env:
-          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
           EMAIL_TO: ${{ secrets.EMAIL_TO }}
           EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
           SMTP_USER: ${{ secrets.SMTP_USER }}
