@@ -4,7 +4,7 @@ Apple Music new-release tracker.
 
 Reads a list of artist names from artists.txt, resolves each to an Apple
 (iTunes) artist ID, checks for releases via the free iTunes lookup API, and
-notifies you (phone push via ntfy + email) about anything new.
+emails you (plus an optional ntfy phone push) about anything new.
 
 State lives in two JSON files so nothing gets re-announced:
   - artist_ids.json : cache of name -> Apple artist id (so we don't re-resolve)
@@ -17,7 +17,11 @@ skipped until the day they go live. Config is read from environment variables
 (see README.md):
   NTFY_TOPIC, NTFY_SERVER
   EMAIL_TO, EMAIL_FROM, SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS
-  ITUNES_COUNTRY (default "US"), RECENT_DAYS (default 45)
+  ITUNES_COUNTRY (default "IN"), RECENT_DAYS (default 45)
+  STORE_UTC_OFFSET_MIN (default 330, i.e. IST — the storefront's local time)
+
+If an email fails to send, the releases in it are left unrecorded and the run
+exits non-zero, so the next run retries them and GitHub flags the failed run.
 """
 
 import json
@@ -39,6 +43,9 @@ BASELINED_FILE = ROOT / "baselined.json"
 
 COUNTRY = os.environ.get("ITUNES_COUNTRY", "IN")
 RECENT_DAYS = int(os.environ.get("RECENT_DAYS", "45"))
+# Apple drops releases at local midnight in each storefront but timestamps them
+# ~07:00 UTC, so release days are compared in the storefront's own timezone.
+STORE_TZ = timezone(timedelta(minutes=int(os.environ.get("STORE_UTC_OFFSET_MIN", "330"))))
 
 NTFY_TOPIC = os.environ.get("NTFY_TOPIC", "")
 NTFY_SERVER = os.environ.get("NTFY_SERVER", "https://ntfy.sh")
@@ -111,9 +118,12 @@ def resolve_artist(name, cache):
 
 
 def get_releases(artist_id):
+    # The lookup returns at most 200 releases in no particular order, so for
+    # prolific artists the newest can fall outside the window. sort=recent makes
+    # it return the newest 200 instead.
     url = (
         "https://itunes.apple.com/lookup"
-        f"?id={artist_id}&entity=album&limit=200&country={COUNTRY}"
+        f"?id={artist_id}&entity=album&limit=200&sort=recent&country={COUNTRY}"
     )
     results = http_get_json(url).get("results", [])
     return [item for item in results if item.get("wrapperType") == "collection"]
@@ -145,20 +155,25 @@ def notify_ntfy(title, message, url):
 
 
 def notify_email(subject, body):
+    """Return True if sent, False if sending failed, None if email isn't configured."""
     if not (EMAIL_TO and EMAIL_FROM and SMTP_PASS):
-        return
+        return None
     msg = EmailMessage()
     msg["Subject"] = subject
     msg["From"] = EMAIL_FROM
     msg["To"] = EMAIL_TO
     msg.set_content(body)
-    try:
-        ctx = ssl.create_default_context()
-        with smtplib.SMTP_SSL(SMTP_HOST, SMTP_PORT, context=ctx) as smtp:
-            smtp.login(SMTP_USER, SMTP_PASS)
-            smtp.send_message(msg)
-    except Exception as exc:
-        print(f"  ! email failed: {exc}")
+    for attempt in range(3):
+        try:
+            ctx = ssl.create_default_context()
+            with smtplib.SMTP_SSL(SMTP_HOST, SMTP_PORT, context=ctx) as smtp:
+                smtp.login(SMTP_USER, SMTP_PASS)
+                smtp.send_message(msg)
+            return True
+        except Exception as exc:
+            print(f"  ! email attempt {attempt + 1} failed: {exc}")
+            time.sleep(10)
+    return False
 
 
 # ------------------------------------------------------------------- main ----
@@ -194,8 +209,10 @@ def main():
     baselined = set(str(x) for x in baselined)
 
     now = datetime.now(timezone.utc)
+    today = datetime.now(STORE_TZ).date()
     cutoff = now - timedelta(days=RECENT_DAYS)
     new_items = []
+    pending = []  # ids of releases about to be announced (un-recorded if email fails)
 
     for name in artists:
         info = resolve_artist(name, ids_cache)
@@ -220,7 +237,9 @@ def main():
             reldate = parse_date(rel.get("releaseDate"))
             # Skip pre-orders / not-yet-released items: don't record or notify
             # them, so they're caught the day they actually go live on Apple Music.
-            if reldate is not None and reldate > now:
+            # Compared by calendar day: a release dated today is live from local
+            # midnight, even though its timestamp is ~07:00 UTC.
+            if reldate is not None and reldate.date() > today:
                 continue
 
             record = {
@@ -237,6 +256,7 @@ def main():
             # so a lost seen.json can't flood you with old back-catalogue.
             if reldate is not None and reldate >= cutoff:
                 new_items.append(record)
+                pending.append(cid)
 
         baselined.add(aid)
         time.sleep(1)
@@ -258,7 +278,7 @@ def main():
             continue
         titles.add(key)
         deduped.append(it)
-    new_items = deduped
+    new_items = sorted(deduped, key=lambda it: it["date"] or "", reverse=True)  # newest first
 
     if not new_items:
         print("No new releases.")
@@ -276,8 +296,21 @@ def main():
     for it in new_items:
         day = (it["date"] or "?")[:10]
         lines.append(f"- {it['artist']} — {it['name']} (out now, {day})\n  {it['url'] or ''}")
-    subject = f"🎵 {len(new_items)} new release(s) from your artists"
-    notify_email(subject, "New releases from your tracked artists:\n\n" + "\n\n".join(lines))
+    # A distinct subject per email, so mail apps don't fold it into an older thread.
+    if len(new_items) == 1:
+        subject = f"🎵 {new_items[0]['artist']} – {new_items[0]['name']}"
+    else:
+        names = sorted({it["artist"] for it in new_items})
+        shown = ", ".join(names[:3]) + (f" +{len(names) - 3} more" if len(names) > 3 else "")
+        subject = f"🎵 {len(new_items)} new releases ({today:%d %b}): {shown}"
+    sent = notify_email(subject, "New releases from your tracked artists:\n\n" + "\n\n".join(lines))
+
+    if sent is False:
+        # Email is the main channel: leave these unrecorded so the next run retries them.
+        for cid in pending:
+            seen.pop(cid, None)
+        save_json(SEEN_FILE, seen)
+        raise SystemExit(f"Email failed; {len(new_items)} release(s) will be retried next run.")
 
     print(f"Notified about {len(new_items)} new release(s).")
 
