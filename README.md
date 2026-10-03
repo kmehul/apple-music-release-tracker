@@ -1,12 +1,14 @@
 # Apple Music new-release tracker
 
-Get an **email** the moment one of your favourite artists drops a single, EP,
-or album — instead of relying on Apple Music's flaky notifications.
+Get an **email** when one of your favourite artists drops a single, EP, or
+album — instead of relying on Apple Music's flaky notifications. It checks four
+times a day, so a new release usually reaches your inbox within about six hours
+of going live.
 
 It works by checking Apple's free [iTunes lookup API](https://performance-partners.apple.com/search-api)
-for each artist on a schedule, remembering what it has already seen, and alerting
-you the moment something is actually out (pre-orders/upcoming releases are
-skipped until they go live). No Apple Developer account, no paid services — it
+for each artist on a schedule, remembering what it has already seen, and emailing
+you once something is actually out (pre-orders/upcoming releases are skipped until
+they go live). No Apple Developer account, no paid services — it
 runs for free on GitHub Actions.
 
 ## How it works
@@ -67,8 +69,8 @@ Optional — under the **Variables** tab, add `ITUNES_COUNTRY` (e.g. `IN`, `US`,
 
 ### 4. Kick it off
 Go to the **Actions** tab → **Check for new releases** → **Run workflow**.
-The first run sets the baseline. From then on it runs automatically every 6
-hours and notifies you of anything new.
+The first run sets the baseline. From then on it runs automatically four times
+a day and emails you anything new.
 
 ## Run it locally (optional, for testing)
 
