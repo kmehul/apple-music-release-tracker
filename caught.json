@@ -1,0 +1,786 @@
+[
+  {
+    "artist": "Marsh",
+    "name": "Home - Single",
+    "date": "2026-07-21T07:00:00Z",
+    "url": "https://music.apple.com/in/album/home-single/6788418715?uo=4",
+    "caught": "2026-07-08T02:09:55Z"
+  },
+  {
+    "artist": "Marsh",
+    "name": "Home (Extended Mix) - Single",
+    "date": "2026-07-21T07:00:00Z",
+    "url": "https://music.apple.com/in/album/home-extended-mix-single/6788413026?uo=4",
+    "caught": "2026-07-08T02:09:55Z"
+  },
+  {
+    "artist": "Eelke Kleijn",
+    "name": "Another Life (feat. Nathan Nicholson) - Single",
+    "date": "2026-07-24T07:00:00Z",
+    "url": "https://music.apple.com/in/album/another-life-feat-nathan-nicholson-single/6786723918?uo=4",
+    "caught": "2026-07-08T08:18:15Z"
+  },
+  {
+    "artist": "Dusky",
+    "name": "Kadhalan - Single",
+    "date": "2026-07-17T07:00:00Z",
+    "url": "https://music.apple.com/in/album/kadhalan-single/6781728388?uo=4",
+    "caught": "2026-07-10T02:30:29Z"
+  },
+  {
+    "artist": "Shubh",
+    "name": "Sohniye - Single",
+    "date": "2026-07-10T07:00:00Z",
+    "url": "https://music.apple.com/in/album/sohniye-single/6787955216?uo=4",
+    "caught": "2026-07-10T09:26:02Z"
+  },
+  {
+    "artist": "Above & Beyond",
+    "name": "Group Therapy 685 (DJ Mix)",
+    "date": "2026-07-11T07:00:00Z",
+    "url": "https://music.apple.com/in/album/group-therapy-685-dj-mix/6789648030?uo=4",
+    "caught": "2026-07-10T19:21:39Z"
+  },
+  {
+    "artist": "Nitrous Oxide",
+    "name": "Breeze - Single",
+    "date": "2026-07-13T07:00:00Z",
+    "url": "https://music.apple.com/in/album/breeze-single/6776885233?uo=4",
+    "caught": "2026-07-13T14:22:34Z"
+  },
+  {
+    "artist": "Atlantis",
+    "name": "Fiji (Yeadon & Slipstream Remixes)",
+    "date": "2026-07-15T07:00:00Z",
+    "url": "https://music.apple.com/in/album/fiji-yeadon-slipstream-remixes/6783849278?uo=4",
+    "caught": "2026-07-15T07:59:11Z"
+  },
+  {
+    "artist": "Talwiinder",
+    "name": "Kyun (From \"Welcome To The Jungle\") - Single",
+    "date": "2026-07-14T07:00:00Z",
+    "url": "https://music.apple.com/in/album/kyun-from-welcome-to-the-jungle-single/6791169198?uo=4",
+    "caught": "2026-07-15T13:25:55Z"
+  },
+  {
+    "artist": "Tiësto",
+    "name": "Echo Sax Finale - Single",
+    "date": "2026-07-17T07:00:00Z",
+    "url": "https://music.apple.com/in/album/echo-sax-finale-single/6791031807?uo=4",
+    "caught": "2026-07-17T08:01:25Z"
+  },
+  {
+    "artist": "MEDUZA",
+    "name": "Weekend - Single",
+    "date": "2026-07-17T07:00:00Z",
+    "url": "https://music.apple.com/in/album/weekend-single/6785465857?uo=4",
+    "caught": "2026-07-17T13:17:43Z"
+  },
+  {
+    "artist": "Nitrous Oxide",
+    "name": "Believe - Single",
+    "date": "2026-07-17T07:00:00Z",
+    "url": "https://music.apple.com/in/album/believe-single/6780678237?uo=4",
+    "caught": "2026-07-17T13:17:43Z"
+  },
+  {
+    "artist": "ALLKNIGHT",
+    "name": "I Found You - Single",
+    "date": "2026-07-22T07:00:00Z",
+    "url": "https://music.apple.com/in/album/i-found-you-single/6781903503?uo=4",
+    "caught": "2026-07-22T08:18:42Z"
+  },
+  {
+    "artist": "LAR",
+    "name": "NICO ROBIN — ESCOLHA VIVER - Single",
+    "date": "2026-07-22T07:00:00Z",
+    "url": "https://music.apple.com/in/album/nico-robin-escolha-viver-single/6789536530?uo=4",
+    "caught": "2026-07-22T08:18:42Z"
+  },
+  {
+    "artist": "Simon Gregory",
+    "name": "Keep Moving On / Sequential",
+    "date": "2026-07-22T07:00:00Z",
+    "url": "https://music.apple.com/in/album/keep-moving-on-sequential/6784193986?uo=4",
+    "caught": "2026-07-22T08:18:42Z"
+  },
+  {
+    "artist": "James Grant",
+    "name": "Nomad",
+    "date": "2026-07-24T07:00:00Z",
+    "url": "https://music.apple.com/in/album/nomad/6784258590?uo=4",
+    "caught": "2026-07-24T08:17:05Z"
+  },
+  {
+    "artist": "Maze 28",
+    "name": "Kaleidoscope - EP",
+    "date": "2026-07-24T07:00:00Z",
+    "url": "https://music.apple.com/in/album/kaleidoscope-ep/6764297227?uo=4",
+    "caught": "2026-07-24T08:17:05Z"
+  },
+  {
+    "artist": "CamelPhat",
+    "name": "Unique Moment (Extended Mix) - Single",
+    "date": "2026-07-24T07:00:00Z",
+    "url": "https://music.apple.com/in/album/unique-moment-extended-mix-single/6782168797?uo=4",
+    "caught": "2026-07-24T13:26:28Z"
+  },
+  {
+    "artist": "LAR",
+    "name": "Hollowfication — Noite no Laboratório - Single",
+    "date": "2026-07-28T07:00:00Z",
+    "url": "https://music.apple.com/in/album/hollowfication-noite-no-laborat%C3%B3rio-single/6791940115?uo=4",
+    "caught": "2026-07-28T08:25:39Z"
+  },
+  {
+    "artist": "Ronski Speed",
+    "name": "Nuru Mpya / Melody Beneath",
+    "date": "2026-07-29T07:00:00Z",
+    "url": "https://music.apple.com/in/album/nuru-mpya-melody-beneath/6785943697?uo=4",
+    "caught": "2026-07-29T08:31:09Z"
+  },
+  {
+    "artist": "Darren Tate",
+    "name": "Colours - EP",
+    "date": "2026-07-31T07:00:00Z",
+    "url": "https://music.apple.com/in/album/colours-ep/6792767891?uo=4",
+    "caught": "2026-07-31T08:42:34Z"
+  },
+  {
+    "artist": "Ezequiel Arias",
+    "name": "Go (feat. HANA) - EP",
+    "date": "2026-07-31T07:00:00Z",
+    "url": "https://music.apple.com/in/album/go-feat-hana-ep/6786361359?uo=4",
+    "caught": "2026-07-31T08:42:34Z"
+  },
+  {
+    "artist": "Matt Fax",
+    "name": "Innerframes - EP",
+    "date": "2026-07-31T07:00:00Z",
+    "url": "https://music.apple.com/in/album/innerframes-ep/6786457388?uo=4",
+    "caught": "2026-07-31T08:42:34Z"
+  },
+  {
+    "artist": "Maze 28",
+    "name": "Tibet (EMPHI & Maze 28 Remix) - Single",
+    "date": "2026-07-31T07:00:00Z",
+    "url": "https://music.apple.com/in/album/tibet-emphi-maze-28-remix-single/6789742896?uo=4",
+    "caught": "2026-07-31T08:42:34Z"
+  },
+  {
+    "artist": "Sunny Lax",
+    "name": "Gravity Of Sleep",
+    "date": "2026-07-31T07:00:00Z",
+    "url": "https://music.apple.com/in/album/gravity-of-sleep/6786337866?uo=4",
+    "caught": "2026-07-31T08:42:34Z"
+  },
+  {
+    "artist": "Swedish House Mafia",
+    "name": "Happiness Is So Sad - Single",
+    "date": "2026-07-31T07:00:00Z",
+    "url": "https://music.apple.com/in/album/happiness-is-so-sad-single/6792537373?uo=4",
+    "caught": "2026-07-31T08:42:34Z"
+  },
+  {
+    "artist": "YOTTO",
+    "name": "Deep Dive (feat. Dakota) - Single",
+    "date": "2026-07-31T07:00:00Z",
+    "url": "https://music.apple.com/in/album/deep-dive-feat-dakota-single/6792032086?uo=4",
+    "caught": "2026-07-31T08:42:34Z"
+  },
+  {
+    "artist": "Estiva",
+    "name": "Solyra EP - EP",
+    "date": "2026-08-05T07:00:00Z",
+    "url": "https://music.apple.com/in/album/solyra-ep-ep/6788866044?uo=4",
+    "caught": "2026-08-05T08:28:14Z"
+  },
+  {
+    "artist": "Jaytech",
+    "name": "Ultramarine - EP",
+    "date": "2026-08-05T07:00:00Z",
+    "url": "https://music.apple.com/in/album/ultramarine-ep/6788418298?uo=4",
+    "caught": "2026-08-05T08:28:14Z"
+  },
+  {
+    "artist": "ANUQRAM",
+    "name": "La Saga (Cosmonaut Remix) - Single",
+    "date": "2026-08-07T07:00:00Z",
+    "url": "https://music.apple.com/in/album/la-saga-cosmonaut-remix-single/6793166064?uo=4",
+    "caught": "2026-08-07T07:06:59Z"
+  },
+  {
+    "artist": "Eelke Kleijn",
+    "name": "Answer Every Question - Single",
+    "date": "2026-08-07T07:00:00Z",
+    "url": "https://music.apple.com/in/album/answer-every-question-single/6793132573?uo=4",
+    "caught": "2026-08-07T07:06:59Z"
+  },
+  {
+    "artist": "Grum",
+    "name": "Mega Bertha - Single",
+    "date": "2026-08-07T07:00:00Z",
+    "url": "https://music.apple.com/in/album/mega-bertha-single/6788731702?uo=4",
+    "caught": "2026-08-07T07:06:59Z"
+  },
+  {
+    "artist": "Grum",
+    "name": "Mega Bertha (Extended) - Single",
+    "date": "2026-08-07T07:00:00Z",
+    "url": "https://music.apple.com/in/album/mega-bertha-extended-single/6788743975?uo=4",
+    "caught": "2026-08-07T07:06:59Z"
+  },
+  {
+    "artist": "Harry Diamond",
+    "name": "Found Myself - Single",
+    "date": "2026-08-07T07:00:00Z",
+    "url": "https://music.apple.com/in/album/found-myself-single/6785724739?uo=4",
+    "caught": "2026-08-07T07:06:59Z"
+  },
+  {
+    "artist": "Maze 28",
+    "name": "UV Ibiza 2026",
+    "date": "2026-08-07T07:00:00Z",
+    "url": "https://music.apple.com/in/album/uv-ibiza-2026/6790337396?uo=4",
+    "caught": "2026-08-07T07:06:59Z"
+  },
+  {
+    "artist": "MEDUZA",
+    "name": "7 Days - Single",
+    "date": "2026-08-07T07:00:00Z",
+    "url": "https://music.apple.com/in/album/7-days-single/6791929555?uo=4",
+    "caught": "2026-08-07T07:06:59Z"
+  },
+  {
+    "artist": "Above & Beyond",
+    "name": "When You Believe",
+    "date": "2026-08-14T07:00:00Z",
+    "url": "https://music.apple.com/in/album/when-you-believe/6793933419?uo=4",
+    "caught": "2026-08-14T07:16:56Z"
+  },
+  {
+    "artist": "CamelPhat",
+    "name": "Sauna (CamelPhat Remix) - Single",
+    "date": "2026-08-14T07:00:00Z",
+    "url": "https://music.apple.com/in/album/sauna-camelphat-remix-single/6796294195?uo=4",
+    "caught": "2026-08-14T07:16:56Z"
+  },
+  {
+    "artist": "James Grant",
+    "name": "Movement Vol. 7 (Live from Medulin, Croatia) [DJ Mix]",
+    "date": "2026-08-14T07:00:00Z",
+    "url": "https://music.apple.com/in/album/movement-vol-7-live-from-medulin-croatia-dj-mix/6800036195?uo=4",
+    "caught": "2026-08-14T07:16:56Z"
+  },
+  {
+    "artist": "Ronski Speed",
+    "name": "Brillion - Single",
+    "date": "2026-08-14T07:00:00Z",
+    "url": "https://music.apple.com/in/album/brillion-single/6795486721?uo=4",
+    "caught": "2026-08-14T07:16:56Z"
+  },
+  {
+    "artist": "Simon Gregory",
+    "name": "Waiting for You - Single",
+    "date": "2026-08-14T07:00:00Z",
+    "url": "https://music.apple.com/in/album/waiting-for-you-single/6795632185?uo=4",
+    "caught": "2026-08-14T07:16:56Z"
+  },
+  {
+    "artist": "Michael Cassette",
+    "name": "United",
+    "date": "2026-08-17T07:00:00Z",
+    "url": "https://music.apple.com/in/album/united/6793072596?uo=4",
+    "caught": "2026-08-17T12:33:16Z"
+  },
+  {
+    "artist": "LAR",
+    "name": "Ichigo Kurosaki — Sem Espada! Sem Céu ! - Single",
+    "date": "2026-08-18T07:00:00Z",
+    "url": "https://music.apple.com/in/album/ichigo-kurosaki-sem-espada-sem-c%C3%A9u-single/6797864548?uo=4",
+    "caught": "2026-08-18T12:35:03Z"
+  },
+  {
+    "artist": "Marsh",
+    "name": "Too High - Single",
+    "date": "2026-08-18T07:00:00Z",
+    "url": "https://music.apple.com/in/album/too-high-single/6797502595?uo=4",
+    "caught": "2026-08-18T12:35:03Z"
+  },
+  {
+    "artist": "ALLKNIGHT",
+    "name": "Electric Love - EP",
+    "date": "2026-08-19T07:00:00Z",
+    "url": "https://music.apple.com/in/album/electric-love-ep/6794131117?uo=4",
+    "caught": "2026-08-19T12:35:31Z"
+  },
+  {
+    "artist": "Craig Connelly",
+    "name": "Quantum Eraser (Enigma State Remix) - Single",
+    "date": "2026-08-19T07:00:00Z",
+    "url": "https://music.apple.com/in/album/quantum-eraser-enigma-state-remix-single/6794756439?uo=4",
+    "caught": "2026-08-19T12:35:31Z"
+  },
+  {
+    "artist": "Darren Tate",
+    "name": "Return Of The Vries",
+    "date": "2026-08-21T07:00:00Z",
+    "url": "https://music.apple.com/in/album/return-of-the-vries/6793980922?uo=4",
+    "caught": "2026-08-21T12:36:02Z"
+  },
+  {
+    "artist": "Dusky",
+    "name": "Bindweed - EP",
+    "date": "2026-08-21T07:00:00Z",
+    "url": "https://music.apple.com/in/album/bindweed-ep/6793247408?uo=4",
+    "caught": "2026-08-21T12:36:02Z"
+  },
+  {
+    "artist": "Matt Fax",
+    "name": "Blow - Single",
+    "date": "2026-08-21T07:00:00Z",
+    "url": "https://music.apple.com/in/album/blow-single/6797935948?uo=4",
+    "caught": "2026-08-21T12:36:02Z"
+  },
+  {
+    "artist": "Maze 28",
+    "name": "Iguana / Cobra / Komodo - Single",
+    "date": "2026-08-21T07:00:00Z",
+    "url": "https://music.apple.com/in/album/iguana-cobra-komodo-single/6793145169?uo=4",
+    "caught": "2026-08-21T12:36:02Z"
+  },
+  {
+    "artist": "CamelPhat",
+    "name": "So Good (feat. Kuuda) [Remixes] - Single",
+    "date": "2026-08-28T07:00:00Z",
+    "url": "https://music.apple.com/in/album/so-good-feat-kuuda-remixes-single/6802286709?uo=4",
+    "caught": "2026-08-28T08:37:15Z"
+  },
+  {
+    "artist": "Eelke Kleijn",
+    "name": "Shed My Skin (feat. Therese) - Single",
+    "date": "2026-08-28T07:00:00Z",
+    "url": "https://music.apple.com/in/album/shed-my-skin-feat-therese-single/6797515663?uo=4",
+    "caught": "2026-08-28T08:37:15Z"
+  },
+  {
+    "artist": "LAR",
+    "name": "Aoshi Shinomori - Carrego os Mortos comigo - Single",
+    "date": "2026-08-28T07:00:00Z",
+    "url": "https://music.apple.com/in/album/aoshi-shinomori-carrego-os-mortos-comigo-single/6797864662?uo=4",
+    "caught": "2026-08-28T08:37:15Z"
+  },
+  {
+    "artist": "Nitrous Oxide",
+    "name": "Rapture - Single",
+    "date": "2026-08-28T07:00:00Z",
+    "url": "https://music.apple.com/in/album/rapture-single/6793976790?uo=4",
+    "caught": "2026-08-28T08:37:15Z"
+  },
+  {
+    "artist": "Eric Luttrell",
+    "name": "Moonlight",
+    "date": "2026-09-01T07:00:00Z",
+    "url": "https://music.apple.com/in/album/moonlight/6798351373?uo=4",
+    "caught": "2026-09-01T10:58:13Z"
+  },
+  {
+    "artist": "LAR",
+    "name": "Levante mais uma vez - Single",
+    "date": "2026-09-01T07:00:00Z",
+    "url": "https://music.apple.com/in/album/levante-mais-uma-vez-single/6797855665?uo=4",
+    "caught": "2026-09-01T10:58:13Z"
+  },
+  {
+    "artist": "Marsh",
+    "name": "Too High (Extended Mix) - Single",
+    "date": "2026-09-01T07:00:00Z",
+    "url": "https://music.apple.com/in/album/too-high-extended-mix-single/6801080567?uo=4",
+    "caught": "2026-09-01T10:58:13Z"
+  },
+  {
+    "artist": "Durante",
+    "name": "Remixed 001 - EP",
+    "date": "2026-09-04T07:00:00Z",
+    "url": "https://music.apple.com/in/album/remixed-001-ep/6802396193?uo=4",
+    "caught": "2026-09-04T10:24:38Z"
+  },
+  {
+    "artist": "Grum",
+    "name": "Unsaid - Single",
+    "date": "2026-09-04T07:00:00Z",
+    "url": "https://music.apple.com/in/album/unsaid-single/6800873804?uo=4",
+    "caught": "2026-09-04T10:24:38Z"
+  },
+  {
+    "artist": "J Ribbon",
+    "name": "Don't Want To Sleep Alone",
+    "date": "2026-09-04T07:00:00Z",
+    "url": "https://music.apple.com/in/album/dont-want-to-sleep-alone/6799077465?uo=4",
+    "caught": "2026-09-04T15:38:55Z"
+  },
+  {
+    "artist": "Lost Frequencies",
+    "name": "Paraiso - Single",
+    "date": "2026-09-04T07:00:00Z",
+    "url": "https://music.apple.com/in/album/paraiso-single/6800828811?uo=4",
+    "caught": "2026-09-04T15:38:55Z"
+  },
+  {
+    "artist": "Above & Beyond",
+    "name": "Group Therapy 693 - Guide To The Gorge (DJ Mix)",
+    "date": "2026-09-05T07:00:00Z",
+    "url": "https://music.apple.com/in/album/group-therapy-693-guide-to-the-gorge-dj-mix/6808305082?uo=4",
+    "caught": "2026-09-05T09:51:18Z"
+  },
+  {
+    "artist": "CamelPhat",
+    "name": "So Good (feat. Kuuda) [Sapian Remix] - Single",
+    "date": "2026-08-28T07:00:00Z",
+    "url": "https://music.apple.com/in/album/so-good-feat-kuuda-sapian-remix-single/6809521481?uo=4",
+    "caught": "2026-09-07T21:02:00Z"
+  },
+  {
+    "artist": "CamelPhat",
+    "name": "Landlords Nightmare - Single",
+    "date": "2026-09-09T07:00:00Z",
+    "url": "https://music.apple.com/in/album/landlords-nightmare-single/6802225094?uo=4",
+    "caught": "2026-09-09T10:38:45Z"
+  },
+  {
+    "artist": "kiskadee",
+    "name": "Lean In (Kiskadee Remix) - Single",
+    "date": "2026-09-09T07:00:00Z",
+    "url": "https://music.apple.com/in/album/lean-in-kiskadee-remix-single/6805454110?uo=4",
+    "caught": "2026-09-10T02:42:42Z"
+  },
+  {
+    "artist": "Lost Frequencies",
+    "name": "Tomorrowland Belgium 2026: Lost Frequencies at Mainstage, Weekend 2 (DJ Mix)",
+    "date": "2026-07-26T07:00:00Z",
+    "url": "https://music.apple.com/in/album/tomorrowland-belgium-2026-lost-frequencies-at-mainstage/6808705503?uo=4",
+    "caught": "2026-09-10T20:21:18Z"
+  },
+  {
+    "artist": "Craig Connelly",
+    "name": "Alexander's Song - Single",
+    "date": "2026-09-11T07:00:00Z",
+    "url": "https://music.apple.com/in/album/alexanders-song-single/6799945515?uo=4",
+    "caught": "2026-09-11T10:28:28Z"
+  },
+  {
+    "artist": "Eelke Kleijn",
+    "name": "Hold On - EP",
+    "date": "2026-09-11T07:00:00Z",
+    "url": "https://music.apple.com/in/album/hold-on-ep/6801703626?uo=4",
+    "caught": "2026-09-11T10:28:28Z"
+  },
+  {
+    "artist": "Eynka",
+    "name": "Flamingo - Single",
+    "date": "2026-09-11T07:00:00Z",
+    "url": "https://music.apple.com/in/album/flamingo-single/6795576553?uo=4",
+    "caught": "2026-09-11T10:28:28Z"
+  },
+  {
+    "artist": "Matt Fax",
+    "name": "Blow / Habits - Single",
+    "date": "2026-09-11T07:00:00Z",
+    "url": "https://music.apple.com/in/album/blow-habits-single/6797954227?uo=4",
+    "caught": "2026-09-11T10:28:28Z"
+  },
+  {
+    "artist": "mor•a•mor",
+    "name": "Blood Runs Blue (ANUQRAM Remix) - Single",
+    "date": "2026-09-11T07:00:00Z",
+    "url": "https://music.apple.com/in/album/blood-runs-blue-anuqram-remix-single/6801193249?uo=4",
+    "caught": "2026-09-11T10:28:28Z"
+  },
+  {
+    "artist": "Marsh",
+    "name": "One Love - Single",
+    "date": "2026-09-15T07:00:00Z",
+    "url": "https://music.apple.com/in/album/one-love-single/6801080904?uo=4",
+    "caught": "2026-09-15T10:53:05Z"
+  },
+  {
+    "artist": "ALLKNIGHT",
+    "name": "Overcome - Single",
+    "date": "2026-09-16T07:00:00Z",
+    "url": "https://music.apple.com/in/album/overcome-single/6803242510?uo=4",
+    "caught": "2026-09-16T10:42:48Z"
+  },
+  {
+    "artist": "ALLKNIGHT",
+    "name": "Becoming - EP",
+    "date": "2026-09-16T07:00:00Z",
+    "url": "https://music.apple.com/in/album/becoming-ep/6803238428?uo=4",
+    "caught": "2026-09-16T10:42:48Z"
+  },
+  {
+    "artist": "Estiva",
+    "name": "Colorscapes Volume Eight - Part One, Mixed by Estiva (DJ Mix)",
+    "date": "2026-09-18T07:00:00Z",
+    "url": "https://music.apple.com/in/album/colorscapes-volume-eight-part-one-mixed-by-estiva-dj-mix/6805653728?uo=4",
+    "caught": "2026-09-18T15:40:46Z"
+  },
+  {
+    "artist": "Genix",
+    "name": "Music Is Life EP",
+    "date": "2026-09-18T07:00:00Z",
+    "url": "https://music.apple.com/in/album/music-is-life-ep/6803173734?uo=4",
+    "caught": "2026-09-18T15:40:46Z"
+  },
+  {
+    "artist": "PROFF",
+    "name": "Colours You Can't See - Single",
+    "date": "2026-09-18T07:00:00Z",
+    "url": "https://music.apple.com/in/album/colours-you-cant-see-single/6804634035?uo=4",
+    "caught": "2026-09-18T15:40:46Z"
+  },
+  {
+    "artist": "Nitrous Oxide",
+    "name": "Firezone - Single",
+    "date": "2026-09-21T07:00:00Z",
+    "url": "https://music.apple.com/in/album/firezone-single/6806097261?uo=4",
+    "caught": "2026-09-21T11:46:43Z"
+  },
+  {
+    "artist": "Talwiinder",
+    "name": "Assay Passay - Single",
+    "date": "2026-09-21T07:00:00Z",
+    "url": "https://music.apple.com/in/album/assay-passay-single/6811052978?uo=4",
+    "caught": "2026-09-22T16:07:57Z"
+  },
+  {
+    "artist": "Dusky",
+    "name": "Signals",
+    "date": "2026-09-25T07:00:00Z",
+    "url": "https://music.apple.com/in/album/signals/6789659241?uo=4",
+    "caught": "2026-09-25T10:59:39Z"
+  },
+  {
+    "artist": "Estiva",
+    "name": "Colorscapes Volume Eight - Mixed by PRAANA & Estiva (DJ Mix)",
+    "date": "2026-09-25T07:00:00Z",
+    "url": "https://music.apple.com/in/album/colorscapes-volume-eight-mixed-by-praana-estiva-dj-mix/6807961792?uo=4",
+    "caught": "2026-09-25T10:59:39Z"
+  },
+  {
+    "artist": "mor•a•mor",
+    "name": "Must Be Dreamin' - Single",
+    "date": "2026-09-25T07:00:00Z",
+    "url": "https://music.apple.com/in/album/must-be-dreamin-single/6807935899?uo=4",
+    "caught": "2026-09-25T10:59:39Z"
+  },
+  {
+    "artist": "Super8 & Tab",
+    "name": "Helsinki Scorchin' 20 - Single",
+    "date": "2026-09-25T07:00:00Z",
+    "url": "https://music.apple.com/in/album/helsinki-scorchin-20-single/6805920491?uo=4",
+    "caught": "2026-09-25T10:59:39Z"
+  },
+  {
+    "artist": "Karan Aujla",
+    "name": "AUJLA SZN 1 - EP",
+    "date": "2026-09-25T07:00:00Z",
+    "url": "https://music.apple.com/in/album/aujla-szn-1-ep/6814002539?uo=4",
+    "caught": "2026-09-25T16:21:42Z"
+  },
+  {
+    "artist": "Matt Fax",
+    "name": "Higher (Dosem Remix) - Single",
+    "date": "2026-09-28T07:00:00Z",
+    "url": "https://music.apple.com/in/album/higher-dosem-remix-single/6808786810?uo=4",
+    "caught": "2026-09-28T12:42:08Z"
+  },
+  {
+    "artist": "MEDUZA",
+    "name": "Different shit - Single",
+    "date": "2026-08-25T07:00:00Z",
+    "url": "https://music.apple.com/in/album/different-shit-single/6816915303?uo=4",
+    "caught": "2026-09-28T12:42:08Z"
+  },
+  {
+    "artist": "Above & Beyond",
+    "name": "Group Therapy 700 Live from The Gorge Amphitheatre - Deep Set (DJ Mix)",
+    "date": "2026-09-28T07:00:00Z",
+    "url": "https://music.apple.com/in/album/group-therapy-700-live-from-the-gorge-amphitheatre/6817025448?uo=4",
+    "caught": "2026-09-28T22:53:09Z"
+  },
+  {
+    "artist": "PROFF",
+    "name": "Violet (Dot Br & Evokings Remix) - Single",
+    "date": "2026-09-30T07:00:00Z",
+    "url": "https://music.apple.com/in/album/violet-dot-br-evokings-remix-single/6807918199?uo=4",
+    "caught": "2026-09-30T11:47:43Z"
+  },
+  {
+    "artist": "Karan Aujla",
+    "name": "Eyes On Me - Single",
+    "date": "2026-09-30T07:00:00Z",
+    "url": "https://music.apple.com/in/album/eyes-on-me-single/6818091147?uo=4",
+    "caught": "2026-10-01T22:15:45Z"
+  },
+  {
+    "artist": "ALLKNIGHT",
+    "name": "Lost & Found (feat. ALLKNIGHT) - Single",
+    "date": "2026-10-02T07:00:00Z",
+    "url": "https://music.apple.com/in/album/lost-found-feat-allknight-single/6809845372?uo=4",
+    "caught": "2026-10-02T11:45:27Z"
+  },
+  {
+    "artist": "ANUQRAM",
+    "name": "The Residents",
+    "date": "2026-10-02T07:00:00Z",
+    "url": "https://music.apple.com/in/album/the-residents/6810558847?uo=4",
+    "caught": "2026-10-02T11:45:27Z"
+  },
+  {
+    "artist": "ANUQRAM",
+    "name": "The Residents (DJ Mix)",
+    "date": "2026-10-02T07:00:00Z",
+    "url": "https://music.apple.com/in/album/the-residents-dj-mix/6810559852?uo=4",
+    "caught": "2026-10-02T11:45:27Z"
+  },
+  {
+    "artist": "Eynka",
+    "name": "Promises",
+    "date": "2026-10-02T07:00:00Z",
+    "url": "https://music.apple.com/in/album/promises/6791604384?uo=4",
+    "caught": "2026-10-02T11:45:27Z"
+  },
+  {
+    "artist": "Above & Beyond",
+    "name": "Group Therapy 696 (DJ Mix)",
+    "date": "2026-10-03T07:00:00Z",
+    "url": "https://music.apple.com/in/album/group-therapy-696-dj-mix/6818134563?uo=4",
+    "caught": "2026-10-02T22:35:48Z"
+  },
+  {
+    "artist": "Above & Beyond",
+    "name": "Group Therapy 695 (DJ Mix)",
+    "date": "2026-09-26T07:00:00Z",
+    "url": "https://music.apple.com/in/album/group-therapy-695-dj-mix/6815731016?uo=4",
+    "caught": "2026-10-02T22:35:48Z"
+  },
+  {
+    "artist": "Above & Beyond",
+    "name": "Group Therapy 700 Live from The Gorge Amphitheatre (DJ Mix)",
+    "date": "2026-09-18T07:00:00Z",
+    "url": "https://music.apple.com/in/album/group-therapy-700-live-from-the-gorge-amphitheatre-dj-mix/6814417859?uo=4",
+    "caught": "2026-10-02T22:35:48Z"
+  },
+  {
+    "artist": "Above & Beyond",
+    "name": "Group Therapy 694 (DJ Mix)",
+    "date": "2026-09-19T07:00:00Z",
+    "url": "https://music.apple.com/in/album/group-therapy-694-dj-mix/6813482410?uo=4",
+    "caught": "2026-10-02T22:35:48Z"
+  },
+  {
+    "artist": "Above & Beyond",
+    "name": "Sky Falls Down (Downtempo Version) - EP",
+    "date": "2026-10-01T07:00:00Z",
+    "url": "https://music.apple.com/in/album/sky-falls-down-downtempo-version-ep/6808292854?uo=4",
+    "caught": "2026-10-02T22:35:48Z"
+  },
+  {
+    "artist": "Above & Beyond",
+    "name": "Group Therapy 692 (DJ Mix)",
+    "date": "2026-08-29T07:00:00Z",
+    "url": "https://music.apple.com/in/album/group-therapy-692-dj-mix/6805970492?uo=4",
+    "caught": "2026-10-02T22:35:48Z"
+  },
+  {
+    "artist": "Above & Beyond",
+    "name": "Group Therapy 691 (DJ Mix)",
+    "date": "2026-08-22T07:00:00Z",
+    "url": "https://music.apple.com/in/album/group-therapy-691-dj-mix/6803539576?uo=4",
+    "caught": "2026-10-02T22:35:48Z"
+  },
+  {
+    "artist": "Above & Beyond",
+    "name": "Group Therapy 690 (DJ Mix)",
+    "date": "2026-08-15T07:00:00Z",
+    "url": "https://music.apple.com/in/album/group-therapy-690-dj-mix/6801228878?uo=4",
+    "caught": "2026-10-02T22:35:48Z"
+  },
+  {
+    "artist": "Above & Beyond",
+    "name": "Sun & Moon (Downtempo Version) [feat. Richard Bedford] - Single",
+    "date": "2026-09-14T07:00:00Z",
+    "url": "https://music.apple.com/in/album/sun-moon-downtempo-version-feat-richard-bedford-single/6801209404?uo=4",
+    "caught": "2026-10-02T22:35:48Z"
+  },
+  {
+    "artist": "Above & Beyond",
+    "name": "Quicksand (Don't Go) [The Remixes]",
+    "date": "2026-09-03T07:00:00Z",
+    "url": "https://music.apple.com/in/album/quicksand-dont-go-the-remixes/6798756184?uo=4",
+    "caught": "2026-10-02T22:35:48Z"
+  },
+  {
+    "artist": "Above & Beyond",
+    "name": "Group Therapy 689 (DJ Mix)",
+    "date": "2026-08-08T07:00:00Z",
+    "url": "https://music.apple.com/in/album/group-therapy-689-dj-mix/6798750987?uo=4",
+    "caught": "2026-10-02T22:35:48Z"
+  },
+  {
+    "artist": "Above & Beyond",
+    "name": "Quicksand (Don't Go) [Ben Nicky Remix]",
+    "date": "2026-08-27T07:00:00Z",
+    "url": "https://music.apple.com/in/album/quicksand-dont-go-ben-nicky-remix/6798340994?uo=4",
+    "caught": "2026-10-02T22:35:48Z"
+  },
+  {
+    "artist": "Above & Beyond",
+    "name": "Group Therapy 688 (DJ Mix)",
+    "date": "2026-08-01T07:00:00Z",
+    "url": "https://music.apple.com/in/album/group-therapy-688-dj-mix/6796341151?uo=4",
+    "caught": "2026-10-02T22:35:48Z"
+  },
+  {
+    "artist": "Above & Beyond",
+    "name": "Group Therapy 687 (DJ Mix)",
+    "date": "2026-07-25T07:00:00Z",
+    "url": "https://music.apple.com/in/album/group-therapy-687-dj-mix/6793969280?uo=4",
+    "caught": "2026-10-02T22:35:48Z"
+  },
+  {
+    "artist": "Above & Beyond",
+    "name": "Group Therapy 686 (DJ Mix)",
+    "date": "2026-07-18T07:00:00Z",
+    "url": "https://music.apple.com/in/album/group-therapy-686-dj-mix/6791630451?uo=4",
+    "caught": "2026-10-02T22:35:48Z"
+  },
+  {
+    "artist": "Above & Beyond",
+    "name": "One Mix with Above & Beyond (DJ Mix)",
+    "date": "2026-07-24T07:00:00Z",
+    "url": "https://music.apple.com/in/album/one-mix-with-above-beyond-dj-mix/6788885715?uo=4",
+    "caught": "2026-10-02T22:35:48Z"
+  },
+  {
+    "artist": "Above & Beyond",
+    "name": "Group Therapy 600 Live From Mexico City - Deep Set (DJ Mix)",
+    "date": "2026-07-13T07:00:00Z",
+    "url": "https://music.apple.com/in/album/group-therapy-600-live-from-mexico-city-deep-set-dj-mix/6782983005?uo=4",
+    "caught": "2026-10-02T22:35:48Z"
+  },
+  {
+    "artist": "Above & Beyond",
+    "name": "Homecoming (Tim Green Remix)",
+    "date": "2026-07-06T07:00:00Z",
+    "url": "https://music.apple.com/in/album/homecoming-tim-green-remix/6779184415?uo=4",
+    "caught": "2026-10-02T22:35:48Z"
+  },
+  {
+    "artist": "Tiësto",
+    "name": "Hard To be Around - Single",
+    "date": "2026-10-02T07:00:00Z",
+    "url": "https://music.apple.com/in/album/hard-to-be-around-single/6817074396?uo=4",
+    "caught": "2026-10-02T22:35:48Z"
+  }
+]

@@ -40,6 +40,9 @@ ARTISTS_FILE = ROOT / "artists.txt"
 IDS_FILE = ROOT / "artist_ids.json"
 SEEN_FILE = ROOT / "seen.json"
 BASELINED_FILE = ROOT / "baselined.json"
+# Every distinct release that has been emailed, oldest first. Read by the "releases caught"
+# stat on github.com/kmehul, so only releases that were actually sent are ever added.
+CAUGHT_FILE = ROOT / "caught.json"
 
 COUNTRY = os.environ.get("ITUNES_COUNTRY", "IN")
 RECENT_DAYS = int(os.environ.get("RECENT_DAYS", "120"))
@@ -311,6 +314,14 @@ def main():
             seen.pop(cid, None)
         save_json(SEEN_FILE, seen)
         raise SystemExit(f"Email failed; {len(new_items)} release(s) will be retried next run.")
+
+    if sent:
+        caught = load_json(CAUGHT_FILE, [])
+        have = {(c["artist"], c["name"]) for c in caught}
+        stamp = now.strftime("%Y-%m-%dT%H:%M:%SZ")
+        caught += [{"artist": it["artist"], "name": it["name"], "date": it["date"], "url": it["url"], "caught": stamp}
+                   for it in reversed(new_items) if (it["artist"], it["name"]) not in have]
+        save_json(CAUGHT_FILE, caught)
 
     print(f"Notified about {len(new_items)} new release(s).")
 

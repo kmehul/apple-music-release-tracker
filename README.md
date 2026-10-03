@@ -22,6 +22,8 @@ artists.txt ──► resolve names to Apple IDs ──► look up each artist's
 - **`artists.txt`** — your list, one artist name per line. This is the only file you edit.
 - **`artist_ids.json`** — auto-generated cache of name → Apple ID.
 - **`seen.json`** — auto-generated log of releases already announced (so nothing repeats).
+- **`caught.json`** — auto-generated list of every release that's been emailed, oldest first.
+  The "releases caught" stat on [github.com/kmehul](https://github.com/kmehul) counts it.
 
 The first run just records everything as a **baseline** (no notification flood).
 Every run after that alerts you only on genuinely new drops.
