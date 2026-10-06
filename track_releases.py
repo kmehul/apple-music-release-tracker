@@ -22,13 +22,19 @@ skipped until the day they go live. Config is read from environment variables
 
 If an email fails to send, the releases in it are left unrecorded and the run
 exits non-zero, so the next run retries them and GitHub flags the failed run.
+
+Only an artist's own singles, EPs and albums are emailed (including ones where
+they're featured or remixing). DJ mixes and compilations of other artists' tracks
+are skipped, unless the artist's line in artists.txt ends with " +all".
 """
 
 import json
 import os
+import re
 import smtplib
 import ssl
 import time
+import unicodedata
 import urllib.request
 from datetime import datetime, timedelta, timezone
 from email.message import EmailMessage
@@ -83,15 +89,21 @@ def save_json(path, data):
     path.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
 
 
+ALL_MARK = "+all"  # artists.txt suffix: email everything, DJ mixes and compilations included
+
+
 def read_artists():
+    """Return [(name, take_all)] from artists.txt, with any ' +all' suffix stripped off."""
     if not ARTISTS_FILE.exists():
         return []
-    names = []
+    artists = []
     for line in ARTISTS_FILE.read_text(encoding="utf-8").splitlines():
         line = line.strip()
         if line and not line.startswith("#"):
-            names.append(line)
-    return names
+            take_all = line.lower().endswith(" " + ALL_MARK)
+            name = line[: -len(ALL_MARK)].strip() if take_all else line
+            artists.append((name, take_all))
+    return artists
 
 
 # ----------------------------------------------------------- itunes calls ----
@@ -130,6 +142,38 @@ def get_releases(artist_id):
     )
     results = http_get_json(url).get("results", [])
     return [item for item in results if item.get("wrapperType") == "collection"]
+
+
+def _fold(text):
+    """Lowercase and strip accents, so 'Tiësto' and 'Tiesto' compare equal."""
+    text = unicodedata.normalize("NFKD", text or "")
+    return "".join(c for c in text if not unicodedata.combining(c)).casefold()
+
+
+def is_own_release(rel, artist_name):
+    """True for the artist's own single/EP/album, False for a DJ mix or a compilation.
+
+    Apple labels all of these "Album" and credits them to the artist, so the track
+    list decides. A track counts if the artist is credited on it, as the track artist
+    (alone or with others, "X & Y") or in the title ("feat. X", "X Remix"). Apple
+    suffixes singles and EPs, and for those one such track is enough. A longer
+    release must be mostly theirs, which rules out compilations of others' tracks.
+    """
+    title = rel.get("collectionName") or ""
+    if re.search(r"\bDJ Mix\b", title, re.I):
+        return False
+    short = re.search(r" - (Single|EP)$", title) is not None
+    who = re.compile(r"(?<![0-9a-z])" + re.escape(_fold(artist_name)) + r"(?![0-9a-z])")
+    url = (
+        "https://itunes.apple.com/lookup"
+        f"?id={rel['collectionId']}&entity=song&limit=200&country={COUNTRY}"
+    )
+    tracks = [t for t in http_get_json(url).get("results", []) if t.get("wrapperType") == "track"]
+    if not tracks:  # no track list available: go by the release's own credit
+        return bool(who.search(_fold(rel.get("artistName"))))
+    credited = sum(bool(who.search(_fold(t.get("artistName")) + " | " + _fold(t.get("trackName"))))
+                   for t in tracks)
+    return credited >= 1 if short else credited * 2 >= len(tracks)
 
 
 # ---------------------------------------------------------- notifications ----
@@ -217,7 +261,7 @@ def main():
     new_items = []
     pending = []  # ids of releases about to be announced (un-recorded if email fails)
 
-    for name in artists:
+    for name, take_all in artists:
         info = resolve_artist(name, ids_cache)
         if not info:
             continue
@@ -258,6 +302,17 @@ def main():
             # Only notify for releases that are actually out and reasonably recent,
             # so a lost seen.json can't flood you with old back-catalogue.
             if reldate is not None and reldate >= cutoff:
+                if not take_all:
+                    try:
+                        own = is_own_release(rel, info["artistName"])
+                    except Exception as exc:
+                        print(f"  ! couldn't read tracks of {record['name']!r}: {exc}")
+                        seen.pop(cid)  # unrecorded, so the next run checks it again
+                        continue
+                    time.sleep(1)
+                    if not own:
+                        print(f"  - skipped DJ mix / compilation: {info['artistName']} — {record['name']}")
+                        continue
                 new_items.append(record)
                 pending.append(cid)
 
