@@ -2,8 +2,8 @@
 
 Get an **email** when one of your favourite artists drops a single, EP, or
 album — instead of relying on Apple Music's flaky notifications. It checks four
-times a day, so a new release usually reaches your inbox within about six hours
-of going live.
+times a day, at 00:17, 06:23, 12:11 and 18:07 IST, so a release that goes live at
+midnight IST reaches your inbox within about 20 minutes.
 
 It works by checking Apple's free [iTunes lookup API](https://performance-partners.apple.com/search-api)
 for each artist on a schedule, remembering what it has already seen, and emailing
@@ -76,8 +76,8 @@ Optional — under the **Variables** tab, add `ITUNES_COUNTRY` (e.g. `IN`, `US`,
 
 ### 4. Kick it off
 Go to the **Actions** tab → **Check for new releases** → **Run workflow**.
-The first run sets the baseline. From then on it runs automatically four times
-a day and emails you anything new.
+The first run sets the baseline. From then on it runs four times a day, started
+by Cloudflare (see below), and emails you anything new.
 
 ## Exact-time checks (Cloudflare)
 
@@ -136,15 +136,18 @@ to do a dry run (it just prints what it finds).
 
 ## Tuning
 
-- **Check more/less often** — edit the `cron` lines in `.github/workflows/check.yml`.
-  Keep them at odd minutes: GitHub delays or drops runs scheduled on the hour.
+- **Change the check times** — edit `RUN_AT` in `cloudflare-worker.js` (UTC times),
+  make sure the Cloudflare cron trigger fires at those minutes and hours, and
+  redeploy the Worker. Update the hour threshold in `watchdog.yml` if the longest
+  gap between checks grows past 8 hours.
 - **How far back counts as "new"** — set `RECENT_DAYS` (default 120). Any
   unseen release dated within this window is emailed; older ones are recorded
   silently, so a catalogue re-listing can't flood you with old albums.
 
 ## Never pauses
 
-GitHub auto-disables scheduled workflows after 60 days of no repo activity. To
-prevent that during a long stretch with no new releases, each run updates a
-`.heartbeat` file with the current month and commits it — keeping the repo
-active well inside the 60-day window, so the schedule runs forever untouched.
+The release check has no GitHub schedule to disable: Cloudflare starts it. The
+daily watchdog is scheduled, and GitHub auto-disables scheduled workflows after
+60 days of no repo activity, so each release check updates a `.heartbeat` file
+with the current month and commits it, keeping the repo active well inside that
+window. If the checks themselves ever stop, the watchdog's failure email says so.

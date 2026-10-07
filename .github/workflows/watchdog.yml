@@ -1,0 +1,34 @@
+name: Watchdog
+
+# Cloudflare starts the release check at 00:17, 06:23, 12:11 and 18:07 IST
+# (cloudflare-worker.js). If that ever stops (a revoked token, a deleted trigger),
+# nothing else would notice, so once a day this fails, and GitHub emails you,
+# when no check has started for 8 hours. The longest normal gap is 6h10m.
+# GitHub may run this late, which doesn't matter for a once-a-day check.
+on:
+  schedule:
+    - cron: "29 9 * * *"    # ~14:59 IST
+  workflow_dispatch: {}
+
+permissions:
+  actions: read
+
+jobs:
+  watchdog:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Has a release check started in the last 8 hours?
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          last=$(gh run list -R "$GITHUB_REPOSITORY" -w check.yml -L 1 --json createdAt -q '.[0].createdAt')
+          if [ -z "$last" ]; then
+            echo "::error::No release check run found at all."
+            exit 1
+          fi
+          hours=$(( ( $(date +%s) - $(date -d "$last" +%s) ) / 3600 ))
+          echo "Last release check started $last (${hours}h ago)."
+          if [ "$hours" -ge 8 ]; then
+            echo "::error::No release check has started for ${hours} hours. Check the release-tracker-cron Worker on Cloudflare: its GH_TOKEN secret and its cron trigger."
+            exit 1
+          fi

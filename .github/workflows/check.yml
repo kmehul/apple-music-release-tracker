@@ -1,16 +1,11 @@
 name: Check for new releases
 
+# Dispatch only. Cloudflare (cloudflare-worker.js) starts this at 00:17, 06:23,
+# 12:11 and 18:07 IST. GitHub's own schedule used to, but started runs 2-6 hours
+# late and sometimes skipped them; a late run also eats the releases the next
+# on-time run should have sent. watchdog.yml emails if these runs ever stop.
 on:
-  # Roughly every 6 hours, deliberately at odd minutes: GitHub delays and
-  # sometimes drops scheduled runs at the top of the hour, its busiest time.
-  # Times are UTC (IST alongside). The 00:17 IST run catches releases that
-  # went live at midnight IST.
-  schedule:
-    - cron: "47 18 * * *"   # 00:17 IST
-    - cron: "53 0 * * *"    # 06:23 IST
-    - cron: "41 6 * * *"    # 12:11 IST
-    - cron: "37 12 * * *"   # 18:07 IST
-  workflow_dispatch: {}       # lets you run it manually from the Actions tab
+  workflow_dispatch: {}       # Cloudflare's trigger, or Run workflow in the Actions tab
 
 permissions:
   contents: write             # needed to commit the updated state files
