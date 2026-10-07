@@ -23,9 +23,10 @@ skipped until the day they go live. Config is read from environment variables
 If an email fails to send, the releases in it are left unrecorded and the run
 exits non-zero, so the next run retries them and GitHub flags the failed run.
 
-Only an artist's own singles, EPs and albums are emailed (including ones where
-they're featured or remixing). DJ mixes and compilations of other artists' tracks
-are skipped, unless the artist's line in artists.txt ends with " +all".
+Apple sometimes files a different artist who shares the name on a tracked artist's
+page, e.g. a rapper credited "feat. Meduza" on MEDUZA's. So a release is only
+emailed if it credits the artist as Apple spells them (extra capitals are fine);
+skipped ones are listed in skipped.json.
 """
 
 import json
@@ -49,6 +50,8 @@ BASELINED_FILE = ROOT / "baselined.json"
 # Every distinct release that has been emailed, oldest first. Read by the "releases caught"
 # stat on github.com/kmehul, so only releases that were actually sent are ever added.
 CAUGHT_FILE = ROOT / "caught.json"
+# Releases skipped because they credit a different artist with the same name.
+SKIPPED_FILE = ROOT / "skipped.json"
 
 COUNTRY = os.environ.get("ITUNES_COUNTRY", "IN")
 RECENT_DAYS = int(os.environ.get("RECENT_DAYS", "120"))
@@ -89,21 +92,15 @@ def save_json(path, data):
     path.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
 
 
-ALL_MARK = "+all"  # artists.txt suffix: email everything, DJ mixes and compilations included
-
-
 def read_artists():
-    """Return [(name, take_all)] from artists.txt, with any ' +all' suffix stripped off."""
     if not ARTISTS_FILE.exists():
         return []
-    artists = []
+    names = []
     for line in ARTISTS_FILE.read_text(encoding="utf-8").splitlines():
         line = line.strip()
         if line and not line.startswith("#"):
-            take_all = line.lower().endswith(" " + ALL_MARK)
-            name = line[: -len(ALL_MARK)].strip() if take_all else line
-            artists.append((name, take_all))
-    return artists
+            names.append(line)
+    return names
 
 
 # ----------------------------------------------------------- itunes calls ----
@@ -122,8 +119,7 @@ def resolve_artist(name, cache):
         return None
     if not results:
         print(f"  ! could not resolve artist: {name!r}")
-        cache[name] = None
-        return None
+        return None  # not cached, so a fixed spelling or a passing glitch resolves next run
     r = results[0]
     info = {"artistId": r["artistId"], "artistName": r.get("artistName", name)}
     cache[name] = info
@@ -133,6 +129,7 @@ def resolve_artist(name, cache):
 
 
 def get_releases(artist_id):
+    """Return (the artist's name as Apple spells it now, their newest releases)."""
     # The lookup returns at most 200 releases in no particular order, so for
     # prolific artists the newest can fall outside the window. sort=recent makes
     # it return the newest 200 instead.
@@ -141,39 +138,41 @@ def get_releases(artist_id):
         f"?id={artist_id}&entity=album&limit=200&sort=recent&country={COUNTRY}"
     )
     results = http_get_json(url).get("results", [])
-    return [item for item in results if item.get("wrapperType") == "collection"]
+    name = next((r.get("artistName") for r in results if r.get("wrapperType") == "artist"), None)
+    return name, [item for item in results if item.get("wrapperType") == "collection"]
 
 
-def _fold(text):
-    """Lowercase and strip accents, so 'Tiësto' and 'Tiesto' compare equal."""
+def _strip_accents(text):
+    """'Tiësto' -> 'Tiesto'. Case is kept: it's what tells MEDUZA from another 'Meduza'."""
     text = unicodedata.normalize("NFKD", text or "")
-    return "".join(c for c in text if not unicodedata.combining(c)).casefold()
+    return "".join(c for c in text if not unicodedata.combining(c))
 
 
-def is_own_release(rel, artist_name):
-    """True for the artist's own single/EP/album, False for a DJ mix or a compilation.
+def credits_artist(rel, artist_name):
+    """True if the release credits this artist as Apple spells them.
 
-    Apple labels all of these "Album" and credits them to the artist, so the track
-    list decides. A track counts if the artist is credited on it, as the track artist
-    (alone or with others, "X & Y") or in the title ("feat. X", "X Remix"). Apple
-    suffixes singles and EPs, and for those one such track is enough. A longer
-    release must be mostly theirs, which rules out compilations of others' tracks.
+    Apple sometimes files a different artist who shares the name on a tracked
+    artist's page: a rapper credited "feat. Meduza" on MEDUZA's, a South African
+    "Proff" on PROFF's. The real artist is credited with Apple's spelling, sometimes
+    with extra capitals as styling ("Hiroyuki SAWANO" for Hiroyuki Sawano). A credit
+    that drops capitals Apple uses ("Meduza", "Proff") is a different name. Checks the
+    release's artist credit and title, then its track credits.
     """
-    title = rel.get("collectionName") or ""
-    if re.search(r"\bDJ Mix\b", title, re.I):
-        return False
-    short = re.search(r" - (Single|EP)$", title) is not None
-    who = re.compile(r"(?<![0-9a-z])" + re.escape(_fold(artist_name)) + r"(?![0-9a-z])")
+    name = _strip_accents(artist_name)
+    who = re.compile(r"(?<![0-9A-Za-z])" + re.escape(name) + r"(?![0-9A-Za-z])", re.I)
+
+    def named(text):
+        return any(all(c == n or (n.islower() and c == n.upper()) for c, n in zip(m.group(), name))
+                   for m in who.finditer(_strip_accents(text)))
+
+    if named(rel.get("artistName")) or named(rel.get("collectionName")):
+        return True
     url = (
         "https://itunes.apple.com/lookup"
         f"?id={rel['collectionId']}&entity=song&limit=200&country={COUNTRY}"
     )
     tracks = [t for t in http_get_json(url).get("results", []) if t.get("wrapperType") == "track"]
-    if not tracks:  # no track list available: go by the release's own credit
-        return bool(who.search(_fold(rel.get("artistName"))))
-    credited = sum(bool(who.search(_fold(t.get("artistName")) + " | " + _fold(t.get("trackName"))))
-                   for t in tracks)
-    return credited >= 1 if short else credited * 2 >= len(tracks)
+    return any(named(t.get("artistName")) or named(t.get("trackName")) for t in tracks)
 
 
 # ---------------------------------------------------------- notifications ----
@@ -259,19 +258,23 @@ def main():
     today = datetime.now(STORE_TZ).date()
     cutoff = now - timedelta(days=RECENT_DAYS)
     new_items = []
+    skipped = []  # releases crediting a different artist with the same name
     pending = []  # ids of releases about to be announced (un-recorded if email fails)
 
-    for name, take_all in artists:
+    for name in artists:
         info = resolve_artist(name, ids_cache)
         if not info:
             continue
         aid = str(info["artistId"])
         artist_is_new = aid not in baselined  # freshly added to artists.txt
         try:
-            releases = get_releases(info["artistId"])
+            apple_name, releases = get_releases(info["artistId"])
         except Exception as exc:
             print(f"  ! lookup failed for {name!r}: {exc}")
             continue
+        if apple_name and apple_name != info["artistName"]:
+            print(f"  name updated: {info['artistName']!r} -> {apple_name!r}")
+            info["artistName"] = apple_name  # cache and emails follow Apple's spelling
 
         for rel in releases:
             cid = rel.get("collectionId")
@@ -302,17 +305,18 @@ def main():
             # Only notify for releases that are actually out and reasonably recent,
             # so a lost seen.json can't flood you with old back-catalogue.
             if reldate is not None and reldate >= cutoff:
-                if not take_all:
-                    try:
-                        own = is_own_release(rel, info["artistName"])
-                    except Exception as exc:
-                        print(f"  ! couldn't read tracks of {record['name']!r}: {exc}")
-                        seen.pop(cid)  # unrecorded, so the next run checks it again
-                        continue
-                    time.sleep(1)
-                    if not own:
-                        print(f"  - skipped DJ mix / compilation: {info['artistName']} — {record['name']}")
-                        continue
+                try:
+                    credited = credits_artist(rel, info["artistName"])
+                except Exception as exc:
+                    print(f"  ! couldn't check credits of {record['name']!r}: {exc}")
+                    seen.pop(cid)  # unrecorded, so the next run checks it again
+                    continue
+                if not credited:
+                    print(f"  - skipped, doesn't credit {info['artistName']}: "
+                          f"{rel.get('artistName')} — {record['name']}")
+                    skipped.append({"tracked": info["artistName"], "credit": rel.get("artistName"),
+                                    "name": record["name"], "date": record["date"], "url": record["url"]})
+                    continue
                 new_items.append(record)
                 pending.append(cid)
 
@@ -322,6 +326,8 @@ def main():
     save_json(IDS_FILE, ids_cache)
     save_json(SEEN_FILE, seen)
     save_json(BASELINED_FILE, sorted(baselined))
+    if skipped:
+        save_json(SKIPPED_FILE, load_json(SKIPPED_FILE, []) + skipped)
 
     if first_run:
         print(f"Baseline set with {len(seen)} known releases. Future runs notify on new ones.")

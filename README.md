@@ -38,18 +38,17 @@ Open `artists.txt` and:
 
 Commit and push. That's it — IDs resolve automatically on the next run.
 
-**What gets emailed:** each artist's own singles, EPs and albums, including
-collaborations ("X & Y"), features and remixes. DJ mixes and compilations of
-other artists' tracks are skipped. Apple labels all of these "Album", so the
-track list tells them apart: a single or EP counts if the artist is credited on
-at least one track, and anything longer only if they're credited on at least half
-of it. To get everything from an artist, mixes and compilations included, end
-their line with ` +all` (e.g. `Above & Beyond +all`).
-
 **Adding an artist won't spam you with their old music.** A newly-added artist
 is baselined silently (their existing catalogue is recorded, not announced), and
 you're only alerted to releases that appear *after* you add them — tracked in
 `baselined.json`.
+
+**Name mix-ups are skipped.** Apple sometimes lists a different artist who shares
+the name on your artist's page (a "feat. Meduza" rap single turned up on
+MEDUZA's). A release is only emailed if it credits your artist as Apple spells
+them; extra capitals are fine ("Hiroyuki SAWANO"), dropped ones aren't ("Meduza"
+isn't MEDUZA). Skipped releases are listed in `skipped.json`. Everything else on
+the page — singles, EPs, albums, remixes, DJ mixes, compilations — is emailed.
 
 ## One-time setup
 

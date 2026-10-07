@@ -21,7 +21,8 @@ concurrency:
 
 jobs:
   check:
-    runs-on: ubuntu-latest
+    # Pinned: ubuntu-latest moves to Ubuntu 26 from 19 Oct 2026, and nothing here needs it.
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v5
 
