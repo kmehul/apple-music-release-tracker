@@ -79,6 +79,41 @@ Go to the **Actions** tab → **Check for new releases** → **Run workflow**.
 The first run sets the baseline. From then on it runs automatically four times
 a day and emails you anything new.
 
+## Exact-time checks (Cloudflare)
+
+GitHub's own scheduled runs started 2-6 hours late here, and sometimes not at
+all. Runs started on request (`workflow_dispatch`) begin within seconds, so a free
+Cloudflare Worker ([`cloudflare-worker.js`](cloudflare-worker.js)) requests one at
+**00:17, 06:23, 12:11 and 18:07 IST**. The 00:17 run catches releases that went
+live at midnight IST.
+
+1. **Create a GitHub token.** Avatar → *Settings* → *Developer settings* →
+   *Personal access tokens* → **Fine-grained tokens** → *Generate new token*:
+   - Name: `cloudflare-release-tracker-cron`
+   - Expiration: **No expiration**, so it can't lapse silently on a forgotten date
+   - Repository access: *Only select repositories* → `apple-music-release-tracker`
+   - Permissions → Repository permissions → **Actions: Read and write**
+   - Generate, then copy the token.
+2. **Create the Worker.** <https://dash.cloudflare.com> → *Workers & Pages* →
+   *Create* → *Create Worker* → name it `release-tracker-cron` → *Deploy*. Then
+   *Edit code*, replace everything with
+   [`cloudflare-worker.js`](cloudflare-worker.js), and *Deploy*.
+3. **Give it the token.** Worker → *Settings* → *Variables and Secrets* → *Add* →
+   type **Secret**, name `GH_TOKEN`, paste the token → *Deploy*.
+4. **Add the schedule.** Worker → *Settings* → *Trigger Events* → *Add* →
+   *Cron Triggers*, and enter exactly:
+
+   ```
+   37,41,47,53 0,6,12,18 * * *
+   ```
+
+   This is one trigger for all four times. Cloudflare's free plan allows 5 per
+   account and the job tracker uses 3. It fires 16 times a day, and the Worker
+   acts only at the four check times.
+
+Each dispatch is logged in the Worker's *Logs* tab ("00:17 IST dispatch -> 204
+ok"), and the runs show up in this repo's Actions tab as *workflow_dispatch*.
+
 ## Run it locally (optional, for testing)
 
 No dependencies — just Python 3.9+.
