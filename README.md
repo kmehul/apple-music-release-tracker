@@ -85,13 +85,16 @@ GitHub's own scheduled runs started 2-6 hours late here, and sometimes not at
 all. Runs started on request (`workflow_dispatch`) begin within seconds, so a free
 Cloudflare Worker ([`cloudflare-worker.js`](cloudflare-worker.js)) requests one at
 **00:17, 06:23, 12:11 and 18:07 IST**. The 00:17 run catches releases that went
-live at midnight IST.
+live at midnight IST. Six minutes after each check, the same Worker refreshes the
+tracker card on [github.com/kmehul](https://github.com/kmehul), whose own hourly
+GitHub schedule was running only every 4-6 hours.
 
 1. **Create a GitHub token.** Avatar → *Settings* → *Developer settings* →
    *Personal access tokens* → **Fine-grained tokens** → *Generate new token*:
    - Name: `cloudflare-release-tracker-cron`
    - Expiration: **No expiration**, so it can't lapse silently on a forgotten date
    - Repository access: *Only select repositories* → `apple-music-release-tracker`
+     **and** `kmehul` (the profile repo, for the card refresh)
    - Permissions → Repository permissions → **Actions: Read and write**
    - Generate, then copy the token.
 2. **Create the Worker.** <https://dash.cloudflare.com> → *Workers & Pages* →
@@ -104,15 +107,16 @@ live at midnight IST.
    *Cron Triggers*, and enter exactly:
 
    ```
-   37,41,47,53 0,6,12,18 * * *
+   37,41,43,47,53,59 0,6,12,18 * * *
    ```
 
-   This is one trigger for all four times. Cloudflare's free plan allows 5 per
-   account and the job tracker uses 3. It fires 16 times a day, and the Worker
-   acts only at the four check times.
+   This is one trigger for everything. Cloudflare's free plan allows 5 per
+   account and the job tracker uses 3. Cron runs every listed minute in every
+   listed hour, in UTC (IST = UTC + 5:30), so it fires 6 × 4 = 24 times a day.
+   The Worker acts on 8 of those: the four checks and the four card refreshes.
 
-Each dispatch is logged in the Worker's *Logs* tab ("00:17 IST dispatch -> 204
-ok"), and the runs show up in this repo's Actions tab as *workflow_dispatch*.
+Each dispatch is logged in the Worker's *Logs* tab ("00:17 IST release check ->
+204 ok"), and the runs show up in the Actions tab as *workflow_dispatch*.
 
 ## Run it locally (optional, for testing)
 
